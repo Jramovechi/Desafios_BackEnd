@@ -43,3 +43,21 @@ npm install <foo>  add the <foo> dependency to your project
 npm run <foo>      run the script named <foo>
 npm test           run this project's tests
 ```
+
+#### Actualizar todas las librerías de tu proyecto que sean compatibles
+```
+npm update -save
+```
+
+#### Eliminar paquete local
+```
+npm rm [nombreDelPaquete]
+npm uninstall [nombreDelPaquete]
+```
+#### Eliminar paquete de forma global
+```
+npm rm -g [nombreDelPaquete]
+npm uninstall -g [nombreDelPaquete]
+```
+
+
