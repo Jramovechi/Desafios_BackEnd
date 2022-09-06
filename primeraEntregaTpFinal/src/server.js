@@ -87,7 +87,7 @@ carritosRouter.get("/", async (req, res) => {
 });
 
 carritosRouter.post("/", async (req, res) => {
-  carritosApi.create().then((resp) => res.send(resp));
+  carritosApi.guardar().then((resp) => res.send(resp));
 });
 
 carritosRouter.delete("/:id", async (req, res) => {
