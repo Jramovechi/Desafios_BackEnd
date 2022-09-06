@@ -1,4 +1,5 @@
 const { promises: fs } = require("fs");
+const moment = require("moment");
 
 class ContenedorArchivo {
   constructor(ruta) {
@@ -30,7 +31,7 @@ class ContenedorArchivo {
       newId = objs[objs.length - 1].id + 1;
     }
 
-    const newObj = { ...obj, id: newId };
+    const newObj = { ...obj, timestamp: moment().format("L LTS"), id: newId };
     objs.push(newObj);
 
     try {
@@ -42,17 +43,24 @@ class ContenedorArchivo {
   }
 
   async actualizar(elem) {
-    const objs = await this.listarAll();
-    const index = objs.findIndex((o) => o.id == elem.id);
-    if (index == -1) {
-      throw new Error(`Error al actualizar: no se encontró el id ${id}`);
-    } else {
-      objs[index] = elem;
-      try {
+    try {
+      const objs = await this.listarAll();
+      const index = objs.findIndex((o) => o.id === elem.id);
+
+      if (index >= 0) {
+        const updatedObject = await {
+          ...elem,
+          timestamp: moment().format("L LTS"),
+          id: elem.id,
+        };
+        objs[index] = updatedObject;
         await fs.writeFile(this.ruta, JSON.stringify(objs, null, 2));
-      } catch (error) {
-        throw new Error(`Error al actualizar: ${error}`);
+        return updatedObject;
+      } else {
+        return false;
       }
+    } catch (err) {
+      console.log("ERROR ->", err);
     }
   }
 
