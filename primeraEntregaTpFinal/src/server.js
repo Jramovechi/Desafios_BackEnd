@@ -51,7 +51,7 @@ productosRouter.post("/", soloAdmins, async (req, res) => {
   const add = await productosApi.guardar(a);
 
   if (admin != true) {
-    res.send(err401);
+    res.send(soloAdmins);
   } else {
     res.send(add);
   }
