@@ -28,7 +28,7 @@ class ContenedorArchivo {
     if (objs.length == 0) {
       newId = 1;
     } else {
-      newId = objs[objs.length - 1].id + 1;
+      newId = objs[objs.length - 1].id, ++1;
     }
 
     const newObj = { ...obj, timestamp: moment().format("L LTS"), id: newId };
